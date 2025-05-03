@@ -12,23 +12,10 @@ from langchain_openai import ChatOpenAI
 from langchain.agents.agent_types import AgentType
 from langchain.memory import ConversationBufferMemory
 
-# ─── Configuration ─────────────────────────────────────────────────────────────
-# First, try Streamlit secrets, fallback to environment variables
-try:
-    API_BASE        = st.secrets["api"]["base_url"]
-    USERNAME        = st.secrets["api"]["username"]
-    PASSWORD        = st.secrets["api"]["password"]
-    OPENAI_API_KEY  = st.secrets["api"]["openai_api_key"]
-except Exception:
-    API_BASE        = os.getenv("API_BASE")
-    USERNAME        = os.getenv("API_USERNAME")
-    PASSWORD        = os.getenv("API_PASSWORD")
-    OPENAI_API_KEY  = os.getenv("OPENAI_API_KEY")
-
-# Validate configuration
-if not all([API_BASE, USERNAME, PASSWORD, OPENAI_API_KEY]):
-    st.error("API credentials or secrets are not set. Please configure them via Streamlit secrets or environment variables.")
-    st.stop()
+API_BASE = "https://maidscc-api.aswat.co"
+USERNAME = "automations@maids.cc"
+PASSWORD = "P$9!Ca5S_X!jvfe"
+OPENAI_API_KEY = "sk-proj-MnHreAKgKT9w1N76jz8ET3BlbkFJPrFz3KNqA4WmXoFK5oDr"
 
 
 # ─── Helper Functions ──────────────────────────────────────────────────────────
