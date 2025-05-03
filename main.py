@@ -13,10 +13,23 @@ from langchain.agents.agent_types import AgentType
 from langchain.memory import ConversationBufferMemory
 
 # ─── Configuration ─────────────────────────────────────────────────────────────
-API_BASE        = st.secrets["api"]["base_url"]
-USERNAME        = st.secrets["api"]["username"]
-PASSWORD        = st.secrets["api"]["password"]
-OPENAI_API_KEY  = st.secrets["api"]["openai_api_key"]
+# First, try Streamlit secrets, fallback to environment variables
+try:
+    API_BASE        = st.secrets["api"]["base_url"]
+    USERNAME        = st.secrets["api"]["username"]
+    PASSWORD        = st.secrets["api"]["password"]
+    OPENAI_API_KEY  = st.secrets["api"]["openai_api_key"]
+except Exception:
+    API_BASE        = os.getenv("API_BASE")
+    USERNAME        = os.getenv("API_USERNAME")
+    PASSWORD        = os.getenv("API_PASSWORD")
+    OPENAI_API_KEY  = os.getenv("OPENAI_API_KEY")
+
+# Validate configuration
+if not all([API_BASE, USERNAME, PASSWORD, OPENAI_API_KEY]):
+    st.error("API credentials or secrets are not set. Please configure them via Streamlit secrets or environment variables.")
+    st.stop()
+
 
 # ─── Helper Functions ──────────────────────────────────────────────────────────
 
