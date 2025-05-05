@@ -12,10 +12,14 @@ from langchain_openai import ChatOpenAI
 from langchain.agents.agent_types import AgentType
 from langchain.memory import ConversationBufferMemory
 
-API_BASE = "https://maidscc-api.aswat.co"
-USERNAME = "automations@maids.cc"
-PASSWORD = "P$9!Ca5S_X!jvfe"
-OPENAI_API_KEY = "sk-proj-MnHreAKgKT9w1N76jz8ET3BlbkFJPrFz3KNqA4WmXoFK5oDr"
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_BASE = os.getenv("API_BASE")
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
+OPENAI_API_KEY = os.getenv("OPENAI_KEY")
 
 
 # ─── Helper Functions ──────────────────────────────────────────────────────────
